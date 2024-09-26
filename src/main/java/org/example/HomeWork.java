@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -64,7 +65,66 @@ public class HomeWork {
      * @see <a href="https://www.codewars.com/kata/545cedaa9943f7fe7b000048">https://www.codewars.com/kata/545cedaa9943f7fe7b000048</a>
      */
     public boolean check(String sentence){
-        return false;
+        int size = 26;
+        int startCharCode = 97;
+        int[] alphabet = new int[size];
+
+        if (sentence == null) {
+            return false;
+        }
+
+        sentence = sentence.replaceAll(" ", "");
+        if (sentence.length() < size) {
+            return false;
+        }
+
+        sentence = sentence.toLowerCase();
+
+        for (int i = 0; i < sentence.length(); i++) {
+            int index = (int) sentence.charAt(i) - startCharCode;
+            if (index < 0 || index > size) {
+                continue;
+            }
+            alphabet[index] = 1;
+        }
+
+        return Arrays.stream(alphabet).sum() == size;
+    }
+
+    public boolean checkRussian(String sentence){
+        int size = 33;
+        int startCharCode = 1072;
+        int[] alphabet = new int[size];
+        if (sentence == null) {
+            return false;
+        }
+
+        sentence = sentence.replaceAll(" ", "");
+        if (sentence.length() < size) {
+            return false;
+        }
+
+        sentence = sentence.toLowerCase();
+
+        for (int i = 0; i < sentence.length(); i++) {
+            int charAt = sentence.charAt(i);
+
+            if (charAt == 1104) {
+                continue;
+            }
+
+            if (charAt == 1105) {
+                charAt--;
+            }
+
+            int index = charAt - startCharCode;
+            if (index < 0 || index > size) {
+                continue;
+            }
+            alphabet[index] = 1;
+        }
+
+        return Arrays.stream(alphabet).sum() == size;
     }
 
 }
