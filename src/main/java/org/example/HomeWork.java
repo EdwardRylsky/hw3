@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,8 +25,31 @@ public class HomeWork {
      * Сигнатуру метода не меняем
      */
     public String findMaxSubstring(String str) {
-        //TODO реализовать метод
-        return null;
+        String result = "";
+        int len = str.length();
+
+        List<String> uniqueSubs = new ArrayList<>();
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(str.charAt(0));
+
+        for (int i = 1; i < len; i++) {
+            String letterAtI = str.substring(i, i+1);
+            if (stringBuilder.indexOf(letterAtI) != -1) {
+                uniqueSubs.add(stringBuilder.toString());
+                stringBuilder = new StringBuilder(letterAtI);
+            } else stringBuilder.append(letterAtI);
+        }
+
+        uniqueSubs.add(stringBuilder.toString());
+
+        for (String subStrings : uniqueSubs) {
+            if (subStrings.length() > result.length()) {
+                result = subStrings;
+            }
+        }
+
+        return result;
     }
 
 
